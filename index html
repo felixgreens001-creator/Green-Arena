@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Arena | Play & Win</title>
+    <style>
+        body { font-family: sans-serif; background: #0a0a0a; color: #00ff00; text-align: center; padding: 20px; }
+        .container { max-width: 400px; margin: auto; border: 2px solid #00ff00; padding: 20px; border-radius: 15px; box-shadow: 0 0 15px #00ff00; }
+        h1 { text-transform: uppercase; letter-spacing: 2px; }
+        .status-box { background: #1a1a1a; padding: 15px; border-radius: 10px; margin-top: 20px; border: 1px dashed #00ff00; }
+        button { background: #00ff00; color: black; border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Green Arena</h1>
+        <p>Ludo • Chess • Real-Time Stakes</p>
+        
+        <div class="status-box" id="auth-section">
+            <p>Connecting to server...</p>
+            <p style="font-size: 0.8em; color: #888;">(Phase 1: Interface Loaded)</p>
+        </div>
+    </div>
+</body>
+</html>
