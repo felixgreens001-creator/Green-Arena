@@ -31,11 +31,27 @@
         }
     </style>
 </head>
-<body>
+<script>
+    let coins = parseInt(localStorage.getItem("coins")) || 10000;
+    document.getElementById("coins").innerText = coins;
+
+    function playChess() {
+        if (coins >= 50) {
+            coins -= 50;
+            localStorage.setItem("coins", coins);
+            document.getElementById("coins").innerText = coins;
+            alert("Chess match started!");
+        } else {
+            alert("Not enough coins!");
+        }
+    }
+</script>
+ <body>
     <div class="box">
         <h1>CHESS</h1>
         <p>Game status: Coming Soon</p>
-        <p>Free coins will be used here</p>
+        <p>Your Coins: <span id="coins"></span></p>
+<button onclick="playChess()">Play (Cost: 50 coins)</button>
 
         <button onclick="history.back()">⬅ Back</button>
     </div>
