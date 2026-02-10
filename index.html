@@ -13,36 +13,94 @@
     </style>
 </head>
 <body>
-    <div class="box">
+    <div class="box" id="loginBox">
         <h1>GREEN ARENA</h1>
-        <p><strong>Casual Online Game Platform</strong></p>
+        <p>Casual Online Game Platform</p>
 
-        <p>Status: <span style="color:#00ff99;">ONLINE</span></p>
-
-        <div class="coins">
-            💰 Free Coins: <script>
-    // Initialize coins if not set
-    if (!localStorage.getItem("coins")) {
-        localStorage.setItem("coins", 10000);
-    }
-
-    // Display coins
-    document.getElementById("coinCount").innerText =
-        localStorage.getItem("coins");
-            </script>
+        <div id="registerForm">
+            <h3>Register</h3>
+            <input type="text" id="regUsername" placeholder="Username"><br><br>
+            <input type="password" id="regPassword" placeholder="Password"><br><br>
+            <input type="email" id="regEmail" placeholder="Email"><br><br>
+            <button onclick="registerUser()">Register</button>
         </div>
 
         <hr style="border: 0.5px solid #333; margin:20px 0;">
 
+        <div id="loginForm">
+            <h3>Login</h3>
+            <input type="text" id="loginUsername" placeholder="Username"><br><br>
+            <input type="password" id="loginPassword" placeholder="Password"><br><br>
+            <button onclick="loginUser()">Login</button>
+        </div>
+    </div>
+
+    <div class="box" id="mainBox" style="display:none;">
+        <h1>Welcome, <span id="userDisplay"></span></h1>
+        <p>Status: <span style="color:#00ff99;">ONLINE</span></p>
+        <div class="coins">
+            💰 Coins: <span id="coinCount">0</span>
+        </div>
+        <hr style="border: 0.5px solid #333; margin:20px 0;">
         <p>🎮 Available Games</p>
-
-<button onclick="location.href='ludo.html'">Play Ludo</button>
-<br><br>
-<button onclick="location.href='chess.html'">Play Chess</button>
-
-        <p style="font-size:0.85em; color:#bbb;">
-            Phase 1 complete · Static site live
-        </p>
+        <button onclick="location.href='ludo.html'">Play Ludo</button>
+        <br><br>
+        <button onclick="location.href='chess.html'">Play Chess</button>
+        <br><br>
+        <button onclick="logoutUser()">Logout</button>
     </div>
 </body>
+<script>
+    // --------------------------
+    // Registration
+    // --------------------------
+    function registerUser() {
+        let username = document.getElementById("regUsername").value;
+        let password = document.getElementById("regPassword").value;
+        let email = document.getElementById("regEmail").value;
+
+        if (!username || !password || !email) {
+            alert("Please fill all fields!");
+            return;
+        }
+
+        // Save user info in localStorage
+        let user = {username, password, email, coins: 10000};
+        localStorage.setItem("user", JSON.stringify(user));
+
+        alert("Registration successful! You can now login.");
+    }
+
+    // --------------------------
+    // Login
+    // --------------------------
+    function loginUser() {
+        let storedUser = JSON.parse(localStorage.getItem("user"));
+        let username = document.getElementById("loginUsername").value;
+        let password = document.getElementById("loginPassword").value;
+
+        if (!storedUser) {
+            alert("No user found. Please register first.");
+            return;
+        }
+
+        if (username === storedUser.username && password === storedUser.password) {
+            // Show main interface
+            document.getElementById("loginBox").style.display = "none";
+            document.getElementById("mainBox").style.display = "block";
+            document.getElementById("userDisplay").innerText = storedUser.username;
+            document.getElementById("coinCount").innerText = storedUser.coins;
+        } else {
+            alert("Invalid username or password");
+        }
+    }
+
+    // --------------------------
+    // Logout
+    // --------------------------
+    function logoutUser() {
+        document.getElementById("loginBox").style.display = "block";
+        document.getElementById("mainBox").style.display = "none";
+    }
+            </script>
 </html>
