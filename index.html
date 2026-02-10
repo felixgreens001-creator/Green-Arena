@@ -20,7 +20,16 @@
         <p>Status: <span style="color:#00ff99;">ONLINE</span></p>
 
         <div class="coins">
-            💰 Free Coins: <span id="coinCount">10,000</span>
+            💰 Free Coins: <script>
+    // Initialize coins if not set
+    if (!localStorage.getItem("coins")) {
+        localStorage.setItem("coins", 10000);
+    }
+
+    // Display coins
+    document.getElementById("coinCount").innerText =
+        localStorage.getItem("coins");
+            </script>
         </div>
 
         <hr style="border: 0.5px solid #333; margin:20px 0;">
