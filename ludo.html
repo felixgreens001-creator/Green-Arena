@@ -31,11 +31,27 @@
         }
     </style>
 </head>
-<body>
+<script>
+    let coins = parseInt(localStorage.getItem("coins")) || 10000;
+    document.getElementById("coins").innerText = coins;
+
+    function playLudo() {
+        if (coins >= 100) {
+            coins -= 100;
+            localStorage.setItem("coins", coins);
+            document.getElementById("coins").innerText = coins;
+            alert("Ludo match started!");
+        } else {
+            alert("Not enough coins!");
+        }
+    }
+</script>
+ <body>
     <div class="box">
         <h1>LUDO</h1>
         <p>Game status: Coming Soon</p>
-        <p>Free coins will be used here</p>
+        <p>Your Coins: <span id="coins"></span></p>
+<button onclick="playLudo()">Play (Cost: 100 coins)</button>
 
         <button onclick="history.back()">⬅ Back</button>
     </div>
