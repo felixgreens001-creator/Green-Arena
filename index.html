@@ -55,9 +55,9 @@
     // Registration
     // --------------------------
     function registerUser() {
-        let username = document.getElementById("regUsername").value;
-        let password = document.getElementById("regPassword").value;
-        let email = document.getElementById("regEmail").value;
+        let username = document.getElementById("regUsername").value.trim();
+        let password = document.getElementById("regPassword").value.trim();
+        let email = document.getElementById("regEmail").value.trim();
 
         if (!username || !password || !email) {
             alert("Please fill all fields!");
@@ -65,8 +65,18 @@
         }
 
         // Save user info in localStorage
-        let user = {username, password, email, coins: 10000};
+        let user = {
+            username: username,
+            password: password,
+            email: email,
+            coins: 10000
+        };
         localStorage.setItem("user", JSON.stringify(user));
+
+        // Clear input fields
+        document.getElementById("regUsername").value = "";
+        document.getElementById("regPassword").value = "";
+        document.getElementById("regEmail").value = "";
 
         alert("Registration successful! You can now login.");
     }
@@ -76,8 +86,8 @@
     // --------------------------
     function loginUser() {
         let storedUser = JSON.parse(localStorage.getItem("user"));
-        let username = document.getElementById("loginUsername").value;
-        let password = document.getElementById("loginPassword").value;
+        let username = document.getElementById("loginUsername").value.trim();
+        let password = document.getElementById("loginPassword").value.trim();
 
         if (!storedUser) {
             alert("No user found. Please register first.");
@@ -90,6 +100,10 @@
             document.getElementById("mainBox").style.display = "block";
             document.getElementById("userDisplay").innerText = storedUser.username;
             document.getElementById("coinCount").innerText = storedUser.coins;
+
+            // Clear login fields
+            document.getElementById("loginUsername").value = "";
+            document.getElementById("loginPassword").value = "";
         } else {
             alert("Invalid username or password");
         }
@@ -102,5 +116,5 @@
         document.getElementById("loginBox").style.display = "block";
         document.getElementById("mainBox").style.display = "none";
     }
-            </script>
+        </script>
 </html>
