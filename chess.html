@@ -32,15 +32,23 @@
     </style>
 </head>
 <script>
-    let coins = parseInt(localStorage.getItem("coins")) || 10000;
+    // Load user coins from localStorage
+    let storedUser = JSON.parse(localStorage.getItem("user"));
+    if (!storedUser) {
+        alert("Please login from home page first.");
+        window.location.href = "index.html";
+    }
+
+    let coins = storedUser.coins;
     document.getElementById("coins").innerText = coins;
 
     function playChess() {
         if (coins >= 50) {
-            coins -= 50;
-            localStorage.setItem("coins", coins);
+            coins -= 50; // deduct coins
+            storedUser.coins = coins;
+            localStorage.setItem("user", JSON.stringify(storedUser));
             document.getElementById("coins").innerText = coins;
-            alert("Chess match started!");
+            alert("Chess match started! 50 coins deducted.");
         } else {
             alert("Not enough coins!");
         }
