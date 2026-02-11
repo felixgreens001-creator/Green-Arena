@@ -12,7 +12,22 @@ body {
     color: white;
     text-align: center;
 }
+body {
+   ...
+}
 
+.container {
+    animation: fadeIn 0.6s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 .container {
     max-width: 400px;
     margin: 50px auto;
@@ -42,47 +57,80 @@ input {
     font-size: 1em;
 }
 
+/* Buttons */
 .primary-btn {
-    background: #39FF14;
-    color: black;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 10px;
-    font-weight: bold;
-    margin: 10px;
-    cursor: pointer;
-}
-
-.secondary-btn {
-    background: #00bcd4;
+    background: linear-gradient(135deg, #6a11cb, #2575fc); /* Modern gradient */
     color: white;
-    padding: 12px 25px;
+    padding: 14px 30px; /* Slightly bigger for modern feel */
     border: none;
-    border-radius: 10px;
-    font-weight: bold;
-    margin: 10px;
+    border-radius: 12px;
+    font-size: 1.1em;
+    font-weight: 600;
     cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
 }
 
-.primary-btn:hover {
-    background: #2ed60f;
-}
-
-.secondary-btn:hover {
-    background: #0097a7;
-}
-        .primary-btn,
 .secondary-btn {
-    transition: 0.2s ease;
+    background: linear-gradient(135deg, #fc5c7d, #6a82fb);
+    color: white;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
 }
 
-.primary-btn:active,
-.secondary-btn:active {
-    transform: scale(0.95);
+/* Hover effects */
+.primary-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+.secondary-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
 
-.form-box h2 {
-    margin-bottom: 15px;
+/* Input fields */
+input {
+    width: 95%;
+    padding: 14px 12px;
+    margin: 12px 0;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.2);
+    font-size: 1em;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #2575fc;
+    transform: scale(1.03);
+}
+
+/* Text sizes */
+h1 {
+    font-size: 2.8em;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 1.2em;
+    color: #ddd;
+}
+
+/* Form box */
+.form-box {
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 420px;
 }
 
 .back-link {
@@ -115,6 +163,22 @@ input {
 
 .container:hover {
     box-shadow: 0 0 35px rgba(0,255,100,0.4);
+}
+.container, .form-box {
+    background: rgba(255, 255, 255, 0.1); /* Transparent white */
+    backdrop-filter: blur(10px); /* Frosted blur */
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* Soft shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect to lift card slightly */
+.container:hover, .form-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
         input:focus {
     outline: none;
