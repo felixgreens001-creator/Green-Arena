@@ -5,50 +5,129 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Green Arena</title>
     <style>
-        body { background-color: #0a0a0a; color: #39FF14; font-family: 'Courier New', monospace; text-align: center; padding: 50px; }
-        .box { border: 2px solid #39FF14; padding: 20px; border-radius: 15px; display: inline-block; }
-        h1 { font-size: 2.5em; text-shadow: 0 0 10px #39FF14; }
-        .coins { font-size: 1.5em; margin: 20px 0; color: gold; }
-        button { background: #39FF14; color: black; border: none; padding: 10px 20px; font-weight: bold; border-radius: 5px; cursor: pointer; }
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #111, #1e1e2f);
+    color: white;
+    text-align: center;
+}
+
+.container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #181828;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0,255,100,0.2);
+}
+
+.logo {
+    font-size: 2.5em;
+    color: #39FF14;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: #aaa;
+    margin-bottom: 30px;
+}
+
+input {
+    width: 90%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: none;
+    font-size: 1em;
+}
+
+.primary-btn {
+    background: #39FF14;
+    color: black;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.secondary-btn {
+    background: #00bcd4;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.primary-btn:hover {
+    background: #2ed60f;
+}
+
+.secondary-btn:hover {
+    background: #0097a7;
+}
+
+.form-box h2 {
+    margin-bottom: 15px;
+}
+
+.back-link {
+    color: #bbb;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.back-link:hover {
+    color: white;
+}
     </style>
 </head>
 <body>
-    <div class="box" id="loginBox">
-        <h1>GREEN ARENA</h1>
-        <p>Casual Online Game Platform</p>
 
-        <div id="registerForm">
-            <h3>Register</h3>
-            <input type="text" id="regUsername" placeholder="Username"><br><br>
-            <input type="password" id="regPassword" placeholder="Password"><br><br>
-            <input type="email" id="regEmail" placeholder="Email"><br><br>
-            <button onclick="registerUser()">Register</button>
-        </div>
+<div class="container">
 
-        <hr style="border: 0.5px solid #333; margin:20px 0;">
+    <h1 class="logo">GREEN ARENA</h1>
+    <p class="subtitle">Casual Online Game Platform</p>
 
-        <div id="loginForm">
-            <h3>Login</h3>
-            <input type="text" id="loginUsername" placeholder="Username"><br><br>
-            <input type="password" id="loginPassword" placeholder="Password"><br><br>
-            <button onclick="loginUser()">Login</button>
-        </div>
+    <!-- Main Buttons -->
+    <div id="mainMenu">
+        <button class="primary-btn" onclick="showRegister()">Register</button>
+        <button class="secondary-btn" onclick="showLogin()">Login</button>
     </div>
 
-    <div class="box" id="mainBox" style="display:none;">
-        <h1>Welcome, <span id="userDisplay"></span></h1>
-        <p>Status: <span style="color:#00ff99;">ONLINE</span></p>
-        <div class="coins">
-            💰 Coins: <span id="coinCount">0</span>
-        </div>
-        <hr style="border: 0.5px solid #333; margin:20px 0;">
-        <p>🎮 Available Games</p>
-        <button onclick="location.href='ludo.html'">Play Ludo</button>
-        <br><br>
-        <button onclick="location.href='chess.html'">Play Chess</button>
-        <br><br>
+    <!-- Register Form -->
+    <div id="registerBox" class="form-box" style="display:none;">
+        <h2>Create Account</h2>
+        <input type="text" id="regUsername" placeholder="Username">
+        <input type="password" id="regPassword" placeholder="Password">
+        <input type="email" id="regEmail" placeholder="Email">
+        <button class="primary-btn" onclick="registerUser()">Register</button>
+        <p class="back-link" onclick="goBack()">← Back</p>
+    </div>
+
+    <!-- Login Form -->
+    <div id="loginBox" class="form-box" style="display:none;">
+        <h2>Welcome Back</h2>
+        <input type="text" id="loginUsername" placeholder="Username">
+        <input type="password" id="loginPassword" placeholder="Password">
+        <button class="secondary-btn" onclick="loginUser()">Login</button>
+        <p class="back-link" onclick="goBack()">← Back</p>
+    </div>
+
+    <!-- Main Game Box -->
+    <div id="mainBox" style="display:none;">
+        <h2>Hello, <span id="userDisplay"></span></h2>
+        <p>Coins: <span id="coinCount"></span></p>
         <button onclick="logoutUser()">Logout</button>
     </div>
+
+</div>
+
 </body>
 <script>
     // --------------------------
@@ -116,5 +195,20 @@
         document.getElementById("loginBox").style.display = "block";
         document.getElementById("mainBox").style.display = "none";
     }
+    function showRegister() {
+    document.getElementById("mainMenu").style.display = "none";
+    document.getElementById("registerBox").style.display = "block";
+}
+
+function showLogin() {
+    document.getElementById("mainMenu").style.display = "none";
+    document.getElementById("loginBox").style.display = "block";
+}
+
+function goBack() {
+    document.getElementById("registerBox").style.display = "none";
+    document.getElementById("loginBox").style.display = "none";
+    document.getElementById("mainMenu").style.display = "block";
+}
 </script>
 </html>
