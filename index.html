@@ -55,8 +55,13 @@ input {
     border-radius: 8px;
     border: none;
     font-size: 1em;
+    background: #222;
+    color: white;
 }
-
+input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+}
 /* Buttons */
 .primary-btn {
     background: linear-gradient(135deg, #6a11cb, #2575fc); /* Modern gradient */
@@ -244,7 +249,12 @@ h1 {
 
     <!-- Login Form -->
     <div id="loginBox" class="form-box" style="display:none;">
-
+<h2>Login</h2>
+<input type="text" id="loginUsername" placeholder="Username">
+<input type="password" id="loginPassword" placeholder="Password">
+<button class="secondary-btn" onclick="loginUser()">Login</button>
+<p class="back-link" onclick="goBack()">← Back</p>
+    </div>
     <!-- Main Game Box -->
     <div id="mainBox" style="display:none;">
         <h2>Hello, <span id="userDisplay"></span></h2>
