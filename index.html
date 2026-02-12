@@ -222,6 +222,17 @@ h1 {
     color: #fff;
     margin: 0;
 }
+.game-area {
+    margin-top: 20px;
+    padding: 30px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 15px;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+        }
     </style>
 </head>
 <body>
@@ -276,6 +287,18 @@ h1 {
 
     <button onclick="logoutUser()" class="secondary-btn">Logout</button>
 </div>
+</div>
+    <!-- Game Screen -->
+<div id="gameScreen" style="display:none;">
+    <h2 id="gameTitle"></h2>
+
+    <div id="gameArea" class="game-area">
+        Game loading...
+    </div>
+
+    <br>
+
+    <button class="secondary-btn" onclick="closeGame()">Back to Menu</button>
 </div>
 
 </body>
@@ -367,5 +390,23 @@ function goBack() {
 function openChess() {
     alert("Chess game will open here.");
 }
+  function openLudo() {
+    document.getElementById("mainBox").style.display = "none";
+    document.getElementById("gameScreen").style.display = "block";
+    document.getElementById("gameTitle").innerText = "Ludo Game";
+    document.getElementById("gameArea").innerHTML = "Ludo board coming soon...";
+}
+
+function openChess() {
+    document.getElementById("mainBox").style.display = "none";
+    document.getElementById("gameScreen").style.display = "block";
+    document.getElementById("gameTitle").innerText = "Chess Game";
+    document.getElementById("gameArea").innerHTML = "Chess board coming soon...";
+}
+
+function closeGame() {
+    document.getElementById("gameScreen").style.display = "none";
+    document.getElementById("mainBox").style.display = "block";
+}  
 </script>
 </html>
