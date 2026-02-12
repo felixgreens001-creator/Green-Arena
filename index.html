@@ -186,6 +186,37 @@ h1 {
     transform: scale(1.03);
     transition: 0.2s ease;
         }
+        .game-selection {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.game-card {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 30px 40px;
+    width: 140px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    background: rgba(255,255,255,0.15);
+}
+
+.game-card p {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+}
     </style>
 </head>
 <body>
@@ -212,21 +243,29 @@ h1 {
     </div>
 
     <!-- Login Form -->
-    <div id="loginBox" class="form-box" style="display:none;">
-        <h2>Welcome Back</h2>
-        <input type="text" id="loginUsername" placeholder="Username">
-        <input type="password" id="loginPassword" placeholder="Password">
-        <button class="secondary-btn" onclick="loginUser()">Login</button>
-        <p class="back-link" onclick="goBack()">← Back</p>
-    </div>
+    <div id="log
 
     <!-- Main Game Box -->
     <div id="mainBox" style="display:none;">
         <h2>Hello, <span id="userDisplay"></span></h2>
         <p>Coins: <span id="coinCount"></span></p>
         <button onclick="logoutUser()">Logout</button>
+   <div id="mainBox" style="display:none;">
+    <h2>Hello, <span id="userDisplay"></span></h2>
+    <p>Coins: <span id="coinCount"></span></p>
+
+    <h3>Select a Game</h3>
+    <div class="game-selection">
+        <div class="game-card" onclick="openLudo()">
+            <p>Ludo</p>
+        </div>
+        <div class="game-card" onclick="openChess()">
+            <p>Chess</p>
+        </div>
     </div>
 
+    <button onclick="logoutUser()" class="secondary-btn">Logout</button>
+</div>
 </div>
 
 </body>
@@ -310,6 +349,13 @@ function goBack() {
     document.getElementById("registerBox").style.display = "none";
     document.getElementById("loginBox").style.display = "none";
     document.getElementById("mainMenu").style.display = "block";
+}
+    function openLudo() {
+    alert("Ludo game will open here.");
+}
+
+function openChess() {
+    alert("Chess game will open here.");
 }
 </script>
 </html>
