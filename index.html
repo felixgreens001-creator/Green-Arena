@@ -233,6 +233,38 @@ h1 {
     justify-content: center;
     font-size: 1.2em;
         }
+        #stakeModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+#stakeModal .modal-content {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    width: 300px;
+}
+
+#stakeModal input {
+    width: 90%;
+    padding: 12px;
+    margin: 15px 0;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+    font-size: 1em;
+}
     </style>
 </head>
 <body>
@@ -301,6 +333,15 @@ h1 {
     <button onclick="logoutUser()" class="secondary-btn">Logout</button>
 </div>
 </div>
+<!-- Stake Selection Modal -->
+<div id="stakeModal" style="display:none;">
+    <div class="modal-content">
+        <h3>Select Your Stake</h3>
+        <input type="number" id="stakeAmount" placeholder="Enter coins to stake">
+        <button class="primary-btn" onclick="startGameWithStake()">Start Game</button>
+        <button class="secondary-btn" onclick="closeStakeModal()">Cancel</button>
+    </div>
+</div> 
     <!-- Game Screen -->
 <div id="gameScreen" style="display:none;">
     <h2 id="gameTitle"></h2>
@@ -396,27 +437,57 @@ function goBack() {
     document.getElementById("loginBox").style.display = "none";
     document.getElementById("mainMenu").style.display = "block";
 }
-    function openLudo() {
-    alert("Ludo game will open here.");
+  let currentGame = ""; // Tracks which game is selected
+
+function openLudo() {
+    currentGame = "Ludo";
+    showStakeModal();
 }
 
 function openChess() {
-    alert("Chess game will open here.");
-}
-  function openLudo() {
-    document.getElementById("mainBox").style.display = "none";
-    document.getElementById("gameScreen").style.display = "block";
-    document.getElementById("gameTitle").innerText = "Ludo Game";
-    document.getElementById("gameArea").innerHTML = "Ludo board coming soon...";
+    currentGame = "Chess";
+    showStakeModal();
 }
 
-function openChess() {
-    document.getElementById("mainBox").style.display = "none";
-    document.getElementById("gameScreen").style.display = "block";
-    document.getElementById("gameTitle").innerText = "Chess Game";
-    document.getElementById("gameArea").innerHTML = "Chess board coming soon...";
+function showStakeModal() {
+    document.getElementById("stakeModal").style.display = "flex";
 }
 
+function closeStakeModal() {
+    document.getElementById("stakeModal").style.display = "none";
+}
+
+function startGameWithStake() {
+    let stake = parseInt(document.getElementById("stakeAmount").value);
+
+    if (isNaN(stake) || stake <= 0) {
+        alert("Enter a valid stake amount!");
+        return;
+    }
+
+    let coins = parseInt(localStorage.getItem("coins")) || 10000;
+
+    if (stake > coins) {
+        alert("You don't have enough coins!");
+        return;
+    }
+
+    // Deduct coins and 20% commission
+    let commission = Math.floor(stake * 0.2);
+    let totalDeducted = stake;
+    coins -= totalDeducted;
+
+    localStorage.setItem("coins", coins);
+    document.getElementById("coinCount").innerText = coins;
+
+    closeStakeModal();
+
+    // Open the game
+    document.getElementById("mainBox").style.display = "none";
+    document.getElementById("gameScreen").style.display = "block";
+    document.getElementById("gameTitle").innerText = currentGame + " Game";
+    document.getElementById("gameArea").innerHTML = `${currentGame} started! Your stake: ${stake} coins. Platform commission: ${commission} coins.`;
+}  
 function closeGame() {
     document.getElementById("gameScreen").style.display = "none";
     document.getElementById("mainBox").style.display = "block";
